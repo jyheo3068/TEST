@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lotto</title>
+  </head>
+
+  <body>
+    <script>
+      //로또 번호 하나를 생성하시오.
+      //이번 주 로또번호 : x,x,x,x,x,x
+
+      //배열에 6개 번호를 담을 변수
+      var lotto = []; //빈배열
+
+      //배열에 1~45의 숫자 담기
+      var nums = [];
+
+      //1~45의 숫자를 담는 for문
+      for (var i = 1; i <= 45; i++) {
+        nums.push(i);
+      }
+
+      //변수에 원하는 값이 들어갔는지 확인 - 확인한 후 삭제
+      //alert(nums);
+
+      //6개의 숫자를 nums에 빼오는 반복문
+      for (var i = 0; i < 6; i++) {
+        //몇번째 것을 빼올 지 지정하는 랜덤 번째 처리
+        //0~44번째를 선택
+        //반복되면서 숫자 한개 씩 빠짐
+        var num = Math.floor(Math.random() * (45 - i));
+
+        //해당 순번의 숫자를 로또 배열에 담기
+        lotto.push(nums[num]);
+
+        //filter() : 조건에 맞는 배열만 새로운 배열로 반환하는 메서드
+        //nums배열에서 선택된 값이 빠져야 함
+        nums = nums.filter(function (n) {
+          return n != nums[num];
+        });
+      }
+
+      //정렬
+      lotto.sort(function (left, right) {
+        return left - right;
+      });
+
+      //출력
+      alert("이번 주 1등 번로또번호 : " + lotto);
+    </script>
+  </body>
+</html>
